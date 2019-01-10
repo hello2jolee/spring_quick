@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+	<!-- Speaker EX -->
+	<!-- 
+	<bean id="tv" class="polymorphism.SamsungTV" p:speaker-ref="sony" p:price="2700000">
+		 <property name="speaker" ref="apple"></property>
+		 <property name="price" value="2700000"></property>
+	</bean>
+	
+	<bean id="sony" class="polymorphism.SonySpeaker"></bean>
+	<bean id="apple" class="polymorphism.AppleSpeaker"></bean>
+	 -->
+	<!-- //Speaker EX -->
+	
+	<!-- Collection EX -->
+	<!-- 
+	<bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<list>
+				<value>서울시 강남구 역삼동</value>
+				<value>서울시 성동구 행당동</value>
+			</list>
+		</property>
+	</bean>
+	 -->
+	<!-- //Collection EX -->
+	
+	<context:component-scan base-package="com.springbook.biz"/>
+	<bean id="log" class="com.springbook.biz.common.Log4jAdvice"/>
+	<aop:config>
+		<aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))"/>
+		<aop:pointcut id="getPointcut" expression="execution(* com.springbook.biz..*Impl.get*(..))"/>
+		<aop:aspect ref="log">
+			<aop:after pointcut-ref="getPointcut" method="printLogging"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
