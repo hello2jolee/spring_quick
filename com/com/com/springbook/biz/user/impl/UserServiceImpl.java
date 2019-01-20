@@ -10,13 +10,15 @@ import com.springbook.biz.user.UserVO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
-
-	public UserVO getUser(UserVO vo) {
-		// TODO Auto-generated method stub
-		return userDAO.getUser(vo);
-	}
 	
 	public void setUser(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
+	
+	@Override
+	public UserVO getUser(UserVO vo) {
+		// TODO Auto-generated method stub
+		return userDAO.getUser(vo);
+	}
+
 }
